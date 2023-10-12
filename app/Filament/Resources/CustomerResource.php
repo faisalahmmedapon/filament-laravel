@@ -21,14 +21,16 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\SelectFilter;
+use Filament\Forms\Components\Toggle;
 
 class CustomerResource extends Resource
 {
     protected static ?string $model = Customer::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-user-group';
 
     public static function form(Form $form): Form
     {
@@ -44,7 +46,7 @@ class CustomerResource extends Resource
                 ->required()->unique()
                 ->maxLength(255),
                 FileUpload::make('image'),
-
+                Toggle::make('status')
             ]);
     }
 
@@ -56,6 +58,7 @@ class CustomerResource extends Resource
                 TextColumn::make('email')->label('Email')->searchable(),
                 TextColumn::make('phone')->label('Phone')->searchable(),
                 ImageColumn::make('image')->label('Photo'),
+                ToggleColumn::make('status'),
             ])
             ->filters([
 

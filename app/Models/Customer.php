@@ -14,5 +14,6 @@ class Customer extends Model
         'phone',
         'image',
         'name',
+        'status',
     ];
 }
